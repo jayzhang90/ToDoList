@@ -62,4 +62,22 @@ public class ToDoList extends AppCompatActivity implements AdapterView.OnItemLon
         }
         return false;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putStringArrayList("toDoThings", toDoThings);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle bundle) {
+        super.onRestoreInstanceState(bundle);
+        toDoThings=bundle.getStringArrayList("toDoThings");
+        myAdapter = new ArrayAdapter<>(                                //adapter is used for non-static list
+                this,
+                android.R.layout.simple_list_item_1,
+                toDoThings);
+        myAdapter.notifyDataSetChanged();
+    }
 }
